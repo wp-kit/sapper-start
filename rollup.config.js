@@ -43,7 +43,8 @@ const preprocess = [
 const replaceconfig = {
    'process.browser': true,
    'process.env.NODE_ENV': JSON.stringify(mode),
-   'pkg.version': pkg.version
+   'pkg.version': pkg.version,
+   'WP_API': JSON.stringify(process.env.WP_API)
 };
 
 /* Config */
