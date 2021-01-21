@@ -59,3 +59,17 @@ Here are the differences:
 ## Bugs and feedback
 
 If you run into an issue which you don't see in the normal sapper-template, open an [issue](https://github.com/matt3224/sapper-start/issues).
+
+## REST-KIT REQUIREMENTS:
+* https://wordpress.org/plugins/wp-rest-filter/
+* https://wordpress.org/plugins/wordpress-seo/
+* https://wordpress.org/plugins/wp-rest-yoast-meta/
+* https://en-gb.wordpress.org/plugins/wp-rest-api-v2-menus/
+
+## REST-KIT TO DO
+* Blocks
+* Mobile Menu
+* Widgets
+* Comments
+* Gravity Forms
+* Preview Auth

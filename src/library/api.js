@@ -27,7 +27,7 @@ export const config = {
 export async function getData(endpoint, params = {}, preload = null, callback) {
 
    const args = Object.keys(params).length ? '?' + query(params) : '';
-   const url = _host + (endpoint !== '' && !endpoint.startsWith('acf/') ? _api + endpoint : endpoint) + args;
+   const url = _host + (endpoint !== '' && !endpoint.includes('/') ? _api + endpoint : endpoint) + args;
 
    const req = await (preload ? preload.fetch(url) : fetch(url));
 
@@ -53,6 +53,10 @@ export function getBlock(block, page = null, index = null) {
 
 export function getCategory(data) {
 	return data._embedded ? data._embedded['wp:term'][0][0] : null
+}
+
+export function getTag(data) {
+	return data._embedded ? data._embedded['wp:term'][1][0] : null
 }
 
 export function getAuthorName(data) {

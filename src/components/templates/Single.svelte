@@ -1,11 +1,3 @@
-<svelte:head>
-   <title>{single.seo?.title || single.title.rendered}</title>
-   <meta name="description" content="{single.seo?.desc}" />
-   <meta property="twitter:image" content="{single.seo?.site}/images/splash.png" />
-   <meta property="og:image" content="{single.seo?.site}/images/splash.png" />
-   <link rel="canonical" href="{single.seo?.site}{single.path || ''}">
-</svelte:head>
-
 <Entry>
 
 	<header class="entry-header alignwide">
@@ -44,8 +36,14 @@
 			
 			<div class="post-taxonomies">
 			
-				<span class="cat-links">Categorized as <a href="/{category?.taxonomy}/{category?.slug}/" rel="category tag">{category?.name}</a> 
-				</span>
+				{#if category}
+					<span class="cat-links">Categorized as <a href="/category/{category?.slug}/" rel="category tag">{category?.name}</a> 
+					</span>
+				{/if}
+				
+				{#if tag}
+					<span class="tags-links">Tagged <a href="/tag/{tag?.slug}/" rel="tag">{tag?.name}</a></span>
+				{/if}
 				
 			</div>	
 			
@@ -57,7 +55,7 @@
 
 <script>
 
-import { getCategory, getAuthorName, getNiceDate } from '~/library/api'
+import { getCategory, getTag, getAuthorName, getNiceDate } from '~/library/api'
 
 	import Entry from '~/components/layout/Entry'
 	import EntryContent from '~/components/layout/EntryContent'
@@ -84,6 +82,7 @@ import { getCategory, getAuthorName, getNiceDate } from '~/library/api'
 	}
 	
 	$: category = getCategory(single)
+	$: tag = getTag(single)
 	$: isPage = single.type === 'page'
 	
 </script>
@@ -116,7 +115,8 @@ import { getCategory, getAuthorName, getNiceDate } from '~/library/api'
 	    display: grid;
 	    grid-template-columns: repeat(2, 1fr);
 	    column-gap: calc(2 * var(--global--spacing-horizontal));
-	    
+	    font-size: var(--global--font-size-xs);
+	        
 	    .posted-on, .byline {
 		    display: block;
 	    }

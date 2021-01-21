@@ -4,13 +4,16 @@
 
 	<div class="site-branding">
 	
-	  <p class="site-title"><a href="/">Rest Kit</a></p>
+	  <p class="site-title"><a href="/">{ info.name }</a></p>
 	
-	  <p class="site-description">Just another WordPress site</p>
+	  <p class="site-description">{ info.description }</p>
 	
 	</div>
 	
-	<Nav />
+	{#if nav?.items?.length}
+		<Nav items={nav.items} />
+	{/if}
+	
 
 </header>
 
@@ -18,23 +21,14 @@
 
 	import Nav from '~/components/layout/Nav'
 	
+	export let info = {}
+	export let nav = {
+		items: []
+	}
+	
 </script>
 
 <style lang="scss">
-
-	.screen-reader-text {
-	    border: 0;
-	    clip: rect(1px, 1px, 1px, 1px);
-	    clip-path: inset(50%);
-	    height: 1px;
-	    margin: -1px;
-	    overflow: hidden;
-	    padding: 0;
-	    position: absolute !important;
-	    width: 1px;
-	    word-wrap: normal !important;
-	    word-break: normal;
-	}
 	
 	.site-header {
 		max-width: var(--responsive--alignwide-width);

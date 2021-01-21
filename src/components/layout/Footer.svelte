@@ -1,12 +1,16 @@
 <footer id="colophon" class="site-footer" role="contentinfo">
 
-	<nav aria-label="Secondary menu" class="footer-navigation">
-		<ul class="footer-navigation-wrapper">
-			<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5">
-				<a href="http://wp.fd.kode.site/sample-page/"><span>Sample Page</span></a>
-			</li>
-		</ul>
-	</nav>
+	{#if nav?.items?.length}
+		<nav aria-label="Secondary menu" class="footer-navigation">
+			<ul class="footer-navigation-wrapper">
+				{#each nav.items as item}
+					<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5">
+						<a href="{new URL(item.url).pathname}"><span>{item.title}</span></a>
+					</li>
+				{/each}
+			</ul>
+		</nav>
+	{/if}
 
 	<div class="site-info">
 	  <div class="site-name">
@@ -17,6 +21,14 @@
 	</div>
 	
 </footer>
+
+<script>
+
+	export let nav = {
+		items: []
+	}
+	
+</script>
 
 <style lang="scss">
 

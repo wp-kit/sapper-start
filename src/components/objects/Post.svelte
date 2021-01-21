@@ -13,7 +13,17 @@
 	<footer class="entry-footer default-max-width">
 		<span class="posted-on">Published <time class="entry-date published updated" datetime="{post.date}">{getNiceDate(post.date)}</time></span>
 		
-		<div class="post-taxonomies"><span class="cat-links">Categorized as <a href="/{category?.taxonomy}/{category?.slug}/" rel="category tag">{category?.name}</a> </span></div>	
+		<div class="post-taxonomies">
+		
+			{#if category}
+				<span class="cat-links">Categorized as <a href="/category/{category?.slug}/" rel="category tag">{category?.name}</a> </span>
+			{/if}
+			
+			{#if tag}
+				<span class="tags-links">Tagged <a href="/tag/{tag?.slug}/" rel="tag">{tag?.name}</a></span>
+			{/if}
+			
+		</div>	
 	
 	</footer>
 	
@@ -21,7 +31,7 @@
 
 <script>
 
-	import { getCategory, getNiceDate } from '~/library/api'
+	import { getCategory, getTag, getNiceDate } from '~/library/api'
 	
 	import Entry from '~/components/layout/Entry'
 	import EntryContent from '~/components/layout/EntryContent'
@@ -39,6 +49,7 @@
 	}
 	
 	$: category = getCategory(post)
+	$: tag = getTag(post)
 	
 </script>
 

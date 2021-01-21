@@ -1,3 +1,7 @@
+<svelte:head>
+   {@html single.yoast_head}
+</svelte:head>
+
 <Single single={single} />
 	
 <script context="module">

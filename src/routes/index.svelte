@@ -1,3 +1,12 @@
+<svelte:head>
+	{#if page}
+		{@html page.yoast_head}
+	{:else}
+		<title>Blog - {info.name}</title>
+	   <meta name="description" content="{info.description}" />
+	{/if}
+</svelte:head>
+
 {#if page}
 	<Single single={page} />
 {:else}
@@ -29,7 +38,9 @@
 
 	import Single from '~/components/templates/Single'
 	import Blog from '~/components/templates/Blog'
+	import { getContext } from 'svelte';
 	
+	const info = getContext('info');
 	export let page
 	export let posts = []
 	
