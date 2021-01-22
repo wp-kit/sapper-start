@@ -50,7 +50,11 @@ export async function post(req, res, next) {
 		
 		const params = req.body
 		
-		const comment = await apiCall('comments', {}, {fetch}, {headers, method: 'POST', body: JSON.stringify(params)})
+		const comment = await apiCall('comments', {}, {fetch}, {
+			headers, 
+			method: 'POST', 
+			body: JSON.stringify(params)
+		})
 		
 		res.setHeader('Content-Type', 'application/json');
 			

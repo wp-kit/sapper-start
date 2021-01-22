@@ -78,16 +78,7 @@
 		content: {
 			rendered: '<p>Content</p>'
 		},
-		acf: {
-			disable_blocks: false
-		},
-		blocks: [],
-		seo: {
-			title: 'Page',
-			description: 'Description',
-			site: process.browser ? window.location.origin : ''
-		},
-		path: process.browser ? window.location.pathname : ''
+		gblocks: []
 	}
 	
 	export let comments = []

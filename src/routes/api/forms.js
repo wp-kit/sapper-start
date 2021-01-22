@@ -48,8 +48,16 @@ export async function post(req, res, next) {
 		
 		const { data, formId } = req.body
 		
-		const entry = await apiCall('gf/v2/forms/' + formId + '/entries', {}, {fetch}, {headers, method: 'POST', body: JSON.stringify(data)})
-		const notifications = await apiCall('gf/v2/entries/' + entry.id + '/notifications', {}, {fetch}, {headers, method: 'POST'})
+		const entry = await apiCall('gf/v2/forms/' + formId + '/entries', {}, {fetch}, {
+			headers, 
+			method: 'POST', 
+			body: JSON.stringify(data)
+		})
+		
+		const notifications = await apiCall('gf/v2/entries/' + entry.id + '/notifications', {}, {fetch}, {
+			headers, 
+			method: 'POST'
+		})
 		
 		res.setHeader('Content-Type', 'application/json');
 			

@@ -77,6 +77,7 @@ If you run into an issue which you don't see in the normal sapper-template, open
 * Matt: Style 404 Page
 * Both: Core Form Fields
 * Both: Core Blocks
+* Both: Update Readme
 
 ## REST-KIT ROADMAP
 * Both: Widgets
