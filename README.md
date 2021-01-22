@@ -34,7 +34,17 @@ Make sure you have a Wordpress installation with the following plugins:
 |[ACF to REST API](https://en-gb.wordpress.org/plugins/acf-to-rest-api/)|We generally recommend this plugin if you plan on using ACF in order to output field values within feild groups assigned to Posts and Pages, as oppose to Blocks. Any fields assigned to ACF Blocks are automatically pulled into the response when using rest-kit|
 |[WP REST Cache](https://wordpress.org/plugins/wp-rest-cache/)|We generally recommend this plugin for all scenarios when using Wordpress as a headless CMS regardless of the framework you are using.|
 
-After you have setup your Wordpress environment, make sure you edit the `.env` file and change the url to reflect your new Wordpress environment.
+After you have setup your Wordpress environment with the plugins above, [add an Application Password to your profile](https://en-gb.wordpress.org/plugins/application-passwords/#description) and update the `.env` file to replace your Wordpress URL, Username and Application Password.
+
+```
+WP_API=http://wp.fd.kode.site/wp-json/
+WP_USERNAME=wpkit
+WP_PASSWORD="Eaos CAc2 ScM7 uX0J 5hL5 LjjG"
+```
+
+*Don't worry, the Username and Application Password is never exposed in the client, these environment variables are used only in server routes when proxying requests for the creation of comments, gravity form entries and when previewing draft posts and pages*
+
+Add some more Pages, Posts, Blocks, Post Types in Wordpress just for testing, and then create 
 
 Open up [localhost:3000](http://localhost:3000) and start clicking around.
 
