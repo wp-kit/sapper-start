@@ -1,5 +1,3 @@
-![Hero](https://i.postimg.cc/fLPyrJ3L/hero.png)
-
 <p align="center">
   A boilerplate for using Wordpress as Headless CMS with Sapper/Svelte. Can be used with Rest Kit or just with Wordpress and a set of plugins. 🚀
 </p>
