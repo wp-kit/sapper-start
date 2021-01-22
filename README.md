@@ -14,7 +14,7 @@ To clone it and get started:
 
 ```bash
 # for Rollup
-npx degit matt3224/sapper-start my-app
+npx degit wp-kit/wp-sapper-start my-app
 cd my-app
 npm install
 npm run dev
