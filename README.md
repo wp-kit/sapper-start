@@ -44,9 +44,7 @@ WP_PASSWORD="Eaos CAc2 ScM7 uX0J 5hL5 LjjG"
 
 *Don't worry, the Username and Application Password are never exposed in the client, these environment variables are used only in server routes when proxying requests for the creation of comments, gravity form entries and when previewing draft posts and pages*
 
-Add some more Pages, Posts, Blocks, Post Types in Wordpress just for testing, and then create 
-
-Open up [localhost:3000](http://localhost:3000) and start clicking around.
+Add some more Pages, Posts, Blocks, Post Types in Wordpress just for testing, and then open up [localhost:3000](http://localhost:3000) and start clicking around.
 
 <hr/>
 
