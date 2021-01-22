@@ -2,15 +2,13 @@
   A boilerplate for using Wordpress as Headless CMS with Sapper/Svelte. Can be used with Rest Kit or just with Wordpress and a set of plugins. 🚀
 </p>
 
-<p align="center">
-  Forked from [matt3224/sapper-start](https://github.com/matt3224/sapper-start) for that lovely Sapper pre-configured setup.
-</p>
-
 ## Hello 👋,
 
 ![GitHub release](https://img.shields.io/github/release/wp-kit/wp-sapper-start.svg?style=for-the-badge)
 
-Wordpres is great, Sapper is great. Why not use them together? This is a boilerplate of Twenty-Twenty-One Theme but in Sapper.
+Wordpress is great, Sapper is great. Why not use them together? This is a boilerplate of Twenty-Twenty-One Theme but in Sapper.
+
+Forked from [matt3224/sapper-start](https://github.com/matt3224/sapper-start) for that lovely Sapper pre-configured setup.
 
 To clone it and get started:
 
