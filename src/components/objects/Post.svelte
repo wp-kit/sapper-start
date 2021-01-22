@@ -1,6 +1,6 @@
 <Entry>
 	
-	<header class="entry-header">
+	<header>
 		<h2 class="entry-title default-max-width">
 			<a href="/{post.slug}">{ post.title.rendered }</a>
 		</h2>

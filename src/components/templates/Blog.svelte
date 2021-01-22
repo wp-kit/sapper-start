@@ -1,10 +1,30 @@
-{#if type}
-
-	<header class="page-header alignwide">
+{#if title}
 	
-		<h1 class="page-title">{type}: <span>{value}</span></h1>			
+	<PageHeader title={title} />
+	
+	{#if search}
+	
+		<div class="search-result-count default-max-width">
 		
-	</header>
+			{#if totalItems > 0}
+		
+				We found {totalItems} result{totalItems > 1 ? 's' : ''} for your search.
+				
+			{:else}
+				
+				Sorry, but nothing matched your search terms. Please try again with some different keywords.
+				
+			{/if}
+			
+		</div>
+		
+		{#if totalItems < 1}
+		
+			<SearchForm value={search} />
+			
+		{/if}
+		
+	{/if}
 	
 {/if}
 
@@ -23,27 +43,24 @@
 	export let value
 	export let currentPage = 1
 	export let totalPages = 1
+	export let totalItems = 1
 	export let root = '/'
+	export let search
 	
 	import Pagination from '~/components/objects/Pagination'
 	import Post from '~/components/objects/Post'
+	import PageHeader from '~/components/layout/PageHeader'
+	import SearchForm from '~/components/widgets/SearchForm'
+	
+	$: title = search ? `Results for "${search}"` : type ? `${type}: ${value}` : ''
 	
 </script>
 
 <style lang="scss">
-
-	.page-header {
-	    border-bottom: 3px solid var(--global--color-border);
-	    padding-bottom: calc(2 * var(--global--spacing-vertical));
-	    max-width: var(--responsive--alignwide-width);
-        margin-left: auto;
-        margin-right: auto;
-	}
 	
-	.page-title {
-	    font-size: var(--global--font-size-page-title);
-	    font-weight: var(--heading--font-weight-page-title);
-	    line-height: var(--heading--line-height-h1);
+	.search-result-count {
+		margin-top: calc(3 * var(--global--spacing-vertical));
+		margin-bottom: calc(3 * var(--global--spacing-vertical));
 	}
 	
 </style>

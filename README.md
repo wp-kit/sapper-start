@@ -71,10 +71,9 @@ If you run into an issue which you don't see in the normal sapper-template, open
 ## REST-KIT TO DO V1
 * Matt: Style/Fix Mobile Menu
 * Matt: Style Pagination
-* Matt: Style Comments + Gravity Forms
+* Matt: Style Comments + Gravity Forms + Search Form
 * Matt: Style Error Alerts (Comment + GF)
 * Matt: Style Success Message (GF)
-* Matt: Style 404 Page
 * Both: Core Form Fields
 * Both: Core Blocks
 * Both: Update Readme

@@ -13,7 +13,7 @@
 {#if page}
 	<Single post={page} />
 {:else}
-	<Blog posts={posts} totalPages={totalPages}  />
+	<Blog posts={posts} totalPages={totalPages} search={search} totalItems={totalItems}  />
 {/if}
 	
 <script context="module">
@@ -22,28 +22,29 @@
 
 	export async function preload({ params, query }) {
 		
-		try {
-			let page
-			if(query.preview && (query.p || query.page_id)) {
-				if(query.page_id) {
-					page = await getPreview('pages', query.page_id, this)
-				} else {
-					page = await getPreview('posts', query.p, this)
-				}
-				if(!page) {
-				    this.error(404, 'Not found');
-			    }
+		let page
+		if(query.preview && (query.p || query.page_id)) {
+			if(query.page_id) {
+				page = await getPreview('pages', query.page_id, this)
+			} else {
+				page = await getPreview('posts', query.p, this)
+			}
+			if(!page) {
+			    this.error(404, 'Not found');
+		    }
+		} else {
+			if(query.s) {
+				const { data, headers } = await apiCall('posts', {_embed: 1, search: query.s}, this, {}, true) 
+				return { page: null, posts: data, totalPages: headers['x-wp-totalpages'], totalItems: headers['x-wp-total'], search: query.s }
 			} else {
 				page = await getPage('home', this)
 			    if(!page) {
-				    throw "No home found, fetch latest posts"
+				    const { data, headers } = await apiCall('posts', {_embed: 1}, this, {}, true) 
+					return { page: null, posts: data, totalPages: headers['x-wp-totalpages'] }
 			    }
 			}
-			return { page, posts: [] }
-		} catch(err) {
-			const { data, headers } = await apiCall('posts', {_embed: 1}, this, {}, true) 
-			return { page: null, posts: data, totalPages: headers['x-wp-totalpages'] }
 		}
+		return { page, posts: [] }
 	}
 
 </script>
@@ -58,5 +59,7 @@
 	export let page
 	export let posts = []
 	export let totalPages = 1
+	export let totalItems = 1
+	export let search
 	
 </script>

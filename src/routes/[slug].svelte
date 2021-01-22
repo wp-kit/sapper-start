@@ -1,11 +1,20 @@
 <svelte:head>
-   <title>{post.yoast_title}</title>
-	{#each post.yoast_meta as meta}
-		<meta name={meta.name || meta.property} content="{meta.content}" />
-	{/each}
+	{#if post}
+		<title>{post.yoast_title}</title>
+		{#each post.yoast_meta as meta}
+			<meta name={meta.name || meta.property} content="{meta.content}" />
+		{/each}
+	{:else}
+	   <title>{postType} Archives - {info.name}</title>
+	   <meta name="description" content="{info.description}" />
+	{/if}
 </svelte:head>
 
-<Single post={post} comments={comments} />
+{#if post}
+	<Single post={post} comments={comments} />
+{:else}
+	<Blog posts={posts} totalPages={totalPages} root={root}  />
+{/if}
 	
 <script context="module">
 
@@ -17,7 +26,11 @@
 	    if(!post) {
 			post = await getPost(params.slug, this)
 			if(!post) {
-				this.error(404, 'Not found');
+				const { data, headers } = await apiCall(params.slug, {_embed: 1}, this, {}, true) 
+				if(!data.length) {
+					this.error(404, 'Not found');
+				}
+				return { page: null, posts: data, totalPages: headers['x-wp-totalpages'], postType: params.slug.charAt(0).toUpperCase() + params.slug.slice(1), root: `/${params.slug}/` }
 			}
 	  	}
 	  	
@@ -37,8 +50,15 @@
 <script>
 
 	import Single from '~/components/templates/Single'
+	import Blog from '~/components/templates/Blog'
+	import { getContext } from 'svelte';
 	
+	const info = getContext('info');
 	export let post
 	export let comments = []
+	export let posts = []
+	export let totalPages = 1
+	export let postType = 'Blog'
+	export let root = '/'
 	
 </script>

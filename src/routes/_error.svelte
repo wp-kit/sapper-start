@@ -3,37 +3,41 @@
    export let error;
 
    const dev = process.env.NODE_ENV === 'development';
+   
+   import SearchForm from '~/components/widgets/SearchForm'
+   import PageHeader from '~/components/layout/PageHeader'
 </script>
 
-<style>
-   h1, p {
-      margin: 0 auto;
-   }
-
-   h1 {
-      font-size: 2.8em;
-      font-weight: 700;
-      margin: 0 0 0.5em 0;
-   }
-
-   p {
-      margin: 1em auto;
-   }
-
-   @media (min-width: 480px) {
-      h1 {
-         font-size: 4em;
-      }
-   }
+<style lang="scss">
+	
+	.not-found {
+		margin-top: calc(3 * var(--global--spacing-vertical));
+	}
+	
+	p {
+	    font-size: var(--global--font-size-lg);
+	    margin-bottom: calc(var(--global--spacing-vertical) * 1.6666666667);
+	}
+	
 </style>
 
 <svelte:head>
    <title>{status}</title>
 </svelte:head>
 
-<h1>{status}</h1>
+<PageHeader title="Nothing here" />
 
-<p>{error.message}</p>
+<div class="error-404 not-found default-max-width">
+	
+	<div class="page-content">
+	
+		<p>It looks like nothing was found at this location. Maybe try a search?</p>
+		
+		<SearchForm />
+		
+	</div>
+
+</div>
 
 {#if dev && error.stack}
    <pre>{error.stack}</pre>

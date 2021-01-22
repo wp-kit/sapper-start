@@ -1,12 +1,10 @@
 <Entry>
 
-	<header class="entry-header alignwide">
-		
-		<h1 class="entry-title">{post.title.rendered}</h1>	
+	<PageHeader title={post.title.rendered} spaced>	
 		
 		<Thumbnail featured={post._embedded['wp:featuredmedia']} />
 		
-	</header>
+	</PageHeader>
 	
 	<EntryContent>
 	
@@ -70,6 +68,7 @@
 	import EntryContent from '~/components/layout/EntryContent'
 	import Comments from '~/components/objects/Comments'
 	import Thumbnail from '~/components/objects/Thumbnail'
+	import PageHeader from '~/components/layout/PageHeader'
 	
 	export let post = {
 		title: {
@@ -91,23 +90,6 @@
 </script>
 
 <style lang="scss">
-	
-	.entry-header {
-	    border-bottom: 3px solid var(--global--color-border);
-	    padding-bottom: calc(2 * var(--global--spacing-vertical));
-	    margin-bottom: calc(3 * var(--global--spacing-vertical));
-	    max-width: var(--responsive--alignwide-width);
-        margin-left: auto;
-        margin-right: auto;
-        
-	}
-	
-	.entry-title {
-	    font-size: var(--global--font-size-page-title);
-	    margin-top: 0;
-	    line-height: var(--heading--line-height-h1);
-		font-weight: var(--heading--font-weight-page-title);
-    }
     
     .entry-footer {
 	    margin-top: calc(3.4 * var(--global--spacing-vertical));
