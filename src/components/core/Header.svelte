@@ -19,7 +19,7 @@
 
 <script type="lang">
 
-	import Nav from '~/components/layout/Nav'
+	import Nav from '~/components/core/Nav'
 	
 	export let info = {}
 	export let nav = {

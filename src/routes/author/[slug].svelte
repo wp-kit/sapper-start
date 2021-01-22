@@ -7,11 +7,11 @@
 	
 <script context="module">
 
-	import { getData, getAuthorName } from '~/library/api';
+	import { apiCall, getAuthorName } from '~/library/api';
 
 	export async function preload({ params, query }) {
 		
-		const posts = await getData('posts', {_embed: 1, 'filter[author_name]':  params.slug}, this)
+		const posts = await apiCall('posts', {_embed: 1, 'filter[author_name]':  params.slug}, this)
 	  	
 	  	const author = posts[0] ? getAuthorName(posts[0]) : params.slug
 	  	

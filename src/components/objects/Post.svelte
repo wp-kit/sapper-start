@@ -4,6 +4,7 @@
 		<h2 class="entry-title default-max-width">
 			<a href="/{post.slug}">{ post.title.rendered }</a>
 		</h2>
+		<Thumbnail featured={post._embedded['wp:featuredmedia']} url="/{post.slug}" />
 	</header>
 
 	<EntryContent spaced>
@@ -36,6 +37,7 @@
 	import Entry from '~/components/layout/Entry'
 	import EntryContent from '~/components/layout/EntryContent'
 	import Paragraph from '~/components/blocks/Paragraph'
+	import Thumbnail from '~/components/objects/Thumbnail'
 	
 	export let post = {
 		title: {
@@ -78,6 +80,7 @@
 	    clear: both;
 	    float: none;
 	    font-size: var(--global--font-size-xs);
+	    border-bottom: var(--separator--height) solid var(--separator--border-color);
 	    
 		margin-top: var(--global--spacing-vertical);
 		padding-top: var(--global--spacing-unit);
@@ -99,5 +102,9 @@
 			color: currentColor;
 		}
 	}
+	
+	:global(.entry:last-child .entry-footer) {
+		border-bottom: var(--separator--height) solid transparent;
+    }
 
 </style>

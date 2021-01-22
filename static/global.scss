@@ -232,8 +232,6 @@
 	}
 }
 
-@import '../node_modules/necolas/normalize.css';
-
 /**
  * Repsonsive Styles
  */
@@ -324,6 +322,10 @@ a {
 	    text-decoration: underline 1px dotted currentColor;
 	    text-decoration-skip-ink: none;
 	    background: rgba(255, 255, 255, 0.9);
+	    
+	    img {
+		    outline: 2px dotted var(--wp--style--color--link, var(--global--color-primary));
+	    }
 	}
 }
 

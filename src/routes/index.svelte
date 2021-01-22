@@ -1,34 +1,48 @@
 <svelte:head>
 	{#if page}
-		{@html page.yoast_head}
+		<title>{page.yoast_title}</title>
+		{#each page.yoast_meta as meta}
+			<meta name={meta.name || meta.property} content="{meta.content}" />
+		{/each}
 	{:else}
-		<title>Blog - {info.name}</title>
+	   <title>Blog - {info.name}</title>
 	   <meta name="description" content="{info.description}" />
 	{/if}
 </svelte:head>
 
 {#if page}
-	<Single single={page} />
+	<Single post={page} />
 {:else}
-	<Blog posts={posts} />
+	<Blog posts={posts} totalPages={totalPages}  />
 {/if}
 	
 <script context="module">
 
-	import { getData } from '~/library/api';
+	import { getPage, apiCall, getPreview } from '~/library/api';
 
 	export async function preload({ params, query }) {
 		
 		try {
-			const pages = await getData('pages', {_embed: null, slug: 'home'}, this)
-			const page = pages[0];
-		    if(!page) {
-			    throw "No home found, fetch latest posts"
-		    }
+			let page
+			if(query.preview && (query.p || query.page_id)) {
+				if(query.page_id) {
+					page = await getPreview('pages', query.page_id, this)
+				} else {
+					page = await getPreview('posts', query.p, this)
+				}
+				if(!page) {
+				    this.error(404, 'Not found');
+			    }
+			} else {
+				page = await getPage('home', this)
+			    if(!page) {
+				    throw "No home found, fetch latest posts"
+			    }
+			}
 			return { page, posts: [] }
 		} catch(err) {
-			const posts = await getData('posts', {_embed: 1}, this) 
-			return { page: null, posts }
+			const { data, headers } = await apiCall('posts', {_embed: 1}, this, {}, true) 
+			return { page: null, posts: data, totalPages: headers['x-wp-totalpages'] }
 		}
 	}
 
@@ -43,5 +57,6 @@
 	const info = getContext('info');
 	export let page
 	export let posts = []
+	export let totalPages = 1
 	
 </script>

@@ -1,7 +1,15 @@
-import Paragraph from '~/components/blocks/Paragraph'
-import Blockquote from '~/components/blocks/Blockquote'
+import { getComponentName } from './utils';
 
-export {
+import Paragraph from '~/components/blocks/Paragraph'
+import Quote from '~/components/blocks/Quote'
+import Form from '~/components/blocks/Form'
+
+const blocks = {
 	Paragraph,
-	Blockquote
+	Quote,
+	Form
+}
+
+export function getBlock(blockName) {
+	return blocks[getComponentName(blockName)]
 }

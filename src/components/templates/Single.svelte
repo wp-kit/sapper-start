@@ -2,18 +2,20 @@
 
 	<header class="entry-header alignwide">
 		
-		<h1 class="entry-title">{single.title.rendered}</h1>					
+		<h1 class="entry-title">{post.title.rendered}</h1>	
+		
+		<Thumbnail featured={post._embedded['wp:featuredmedia']} />
 		
 	</header>
 	
 	<EntryContent>
 	
-		{#if single.acf?.disable_blocks || !single.blocks?.length}
-			{@html single.content.rendered}
+		{#if !post.gblocks?.length}
+			{@html post.content.rendered}
 		{:else}
-			{ #if single.blocks.length }
-			    { #each single.blocks as block }
-			        <svelte:component this="{getBlock(block.name)}" data="{block.data}" />
+			{ #if post.gblocks.length }
+			    { #each post.gblocks as block }
+			        <svelte:component this="{getBlock(block.blockName)}" data="{block}" />
 			    { /each }
 			{ /if }
 		{/if}
@@ -27,10 +29,10 @@
 			<div class="posted-by">
 			
 				<span class="posted-on">Published 
-					<time class="entry-date published updated" datetime="{single.date}">{getNiceDate(single.date)}</time>
+					<time class="entry-date published updated" datetime="{post.date}">{getNiceDate(post.date)}</time>
 				</span>
 				
-				<span class="byline">By <a href="/author/{getAuthorName(single)}/" rel="author">{getAuthorName(single)}</a></span>
+				<span class="byline">By <a href="/author/{getAuthorName(post)}/" rel="author">{getAuthorName(post)}</a></span>
 				
 			</div>
 			
@@ -50,19 +52,26 @@
 		</footer>
 		
 	{/if}
+	
+	{#if showComments} 
+	
+		<Comments comments={comments} post={post} />
+		
+	{/if}
 
 </Entry>
 
 <script>
 
-import { getCategory, getTag, getAuthorName, getNiceDate } from '~/library/api'
+	import { getCategory, getTag, getAuthorName, getNiceDate } from '~/library/api'
+	import { getBlock } from '~/library/blocks';
 
 	import Entry from '~/components/layout/Entry'
 	import EntryContent from '~/components/layout/EntryContent'
+	import Comments from '~/components/objects/Comments'
+	import Thumbnail from '~/components/objects/Thumbnail'
 	
-	import { getBlock } from '~/library/api';
-	
-	export let single = {
+	export let post = {
 		title: {
 			rendered: 'Page'
 		},
@@ -81,9 +90,12 @@ import { getCategory, getTag, getAuthorName, getNiceDate } from '~/library/api'
 		path: process.browser ? window.location.pathname : ''
 	}
 	
-	$: category = getCategory(single)
-	$: tag = getTag(single)
-	$: isPage = single.type === 'page'
+	export let comments = []
+	
+	$: category = getCategory(post)
+	$: tag = getTag(post)
+	$: isPage = post.type === 'page'
+	$: showComments = post.comment_status === 'open'
 	
 </script>
 
@@ -96,6 +108,7 @@ import { getCategory, getTag, getAuthorName, getNiceDate } from '~/library/api'
 	    max-width: var(--responsive--alignwide-width);
         margin-left: auto;
         margin-right: auto;
+        
 	}
 	
 	.entry-title {

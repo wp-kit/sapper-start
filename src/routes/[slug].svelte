@@ -1,26 +1,35 @@
 <svelte:head>
-   {@html single.yoast_head}
+   <title>{post.yoast_title}</title>
+	{#each post.yoast_meta as meta}
+		<meta name={meta.name || meta.property} content="{meta.content}" />
+	{/each}
 </svelte:head>
 
-<Single single={single} />
+<Single post={post} comments={comments} />
 	
 <script context="module">
 
-	import { getData } from '~/library/api';
+	import { getPage, apiCall, getPost } from '~/library/api';
 
 	export async function preload({ params, query }) {
 		
-		const pages = await getData('pages', {_embed: null, slug: params.slug}, this)
-		let single = pages[0];
-	    if(!single) {
-			const posts = await getData('posts', {_embed: 1, slug: params.slug}, this)
-			single = posts[0];
-			if(!single) {
+		let post = await getPage(params.slug, this)
+	    if(!post) {
+			post = await getPost(params.slug, this)
+			if(!post) {
 				this.error(404, 'Not found');
 			}
 	  	}
 	  	
-		return { single }
+	  	let comments = []
+	  	
+	  	if( post.comment_status === 'open' ) {
+		  	
+			comments = await apiCall('comments', {post: post.id, order: 'asc'}, this)
+		  	
+	  	}
+	  	
+		return { post, comments }
 	}
 
 </script>
@@ -29,6 +38,7 @@
 
 	import Single from '~/components/templates/Single'
 	
-	export let single
+	export let post
+	export let comments = []
 	
 </script>

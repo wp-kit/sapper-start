@@ -7,11 +7,11 @@
 	
 <script context="module">
 
-	import { getData, getTag } from '~/library/api';
+	import { apiCall, getTag } from '~/library/api';
 
 	export async function preload({ params, query }) {
 		
-		const posts = await getData('posts', {_embed: 1, 'filter[tag_name]':  params.slug}, this)
+		const posts = await apiCall('posts', {_embed: 1, 'filter[tag_name]':  params.slug}, this)
 	  	
 	  	const tag = posts[0] ? getTag(posts[0]).name : params.slug
 	  	

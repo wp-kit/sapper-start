@@ -43,13 +43,13 @@
 
 <script context="module">
 
-	import { getData } from '~/library/api';
+	import { apiCall } from '~/library/api';
 
 	export async function preload({ params, query }) {
 		
-		const info = await getData('', {}, this)
-		const topNav = await getData('menus/v1/locations/primary', {}, this)
-		const bottomNav = await getData('menus/v1/locations/footer', {}, this)
+		const info = await apiCall('', {}, this)
+		const topNav = await apiCall('menus/v1/locations/primary', {}, this)
+		const bottomNav = await apiCall('menus/v1/locations/footer', {}, this)
 		
 		return { info, topNav, bottomNav }
 	}
@@ -62,8 +62,8 @@
    export let topNav = {}
    export let bottomNav = {}
    
-   import Header from '~/components/layout/Header'
-   import Footer from '~/components/layout/Footer'
+   import Header from '~/components/core/Header'
+   import Footer from '~/components/core/Footer'
    import { setContext } from 'svelte';
    
    $: setContext('info', info)

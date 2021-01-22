@@ -60,16 +60,23 @@ Here are the differences:
 
 If you run into an issue which you don't see in the normal sapper-template, open an [issue](https://github.com/matt3224/sapper-start/issues).
 
-## REST-KIT REQUIREMENTS:
+## REQUIREMENTS:
 * https://wordpress.org/plugins/wp-rest-filter/
 * https://wordpress.org/plugins/wordpress-seo/
 * https://wordpress.org/plugins/wp-rest-yoast-meta/
-* https://en-gb.wordpress.org/plugins/wp-rest-api-v2-menus/
+* https://wordpress.org/plugins/wp-rest-api-v2-menus/
+* https://wordpress.org/plugins/application-passwords/
+* https://github.com/wp-kit/wp-acf-rest-api-blocks (or wp-kit/rest-kit)
 
-## REST-KIT TO DO
-* Blocks
-* Mobile Menu
-* Widgets
-* Comments
-* Gravity Forms
-* Preview Auth
+## REST-KIT TO DO V1
+* Matt: Style/Fix Mobile Menu
+* Matt: Style Pagination
+* Matt: Style Comments + Gravity Forms
+* Matt: Style Error Alerts (Comment + GF)
+* Matt: Style Success Message (GF)
+* Matt: Style 404 Page
+* Both: Core Form Fields
+* Both: Core Blocks
+
+## REST-KIT ROADMAP
+* Both: Widgets

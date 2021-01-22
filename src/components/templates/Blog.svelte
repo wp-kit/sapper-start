@@ -14,12 +14,18 @@
 	
 {/each}
 
+<Pagination totalPages={totalPages} currentPage={currentPage} root={root} />
+
 <script>
 
 	export let posts = []
 	export let type
 	export let value
+	export let currentPage = 1
+	export let totalPages = 1
+	export let root = '/'
 	
+	import Pagination from '~/components/objects/Pagination'
 	import Post from '~/components/objects/Post'
 	
 </script>

@@ -17,3 +17,12 @@ export function query(obj) {
 
    return str;
 }
+
+export function getComponentName(block) {
+    block = (block||'')
+    	.split('/')
+    	.pop()
+		.toLowerCase()
+        .replace(/(\b|-)\w/g, (m) => m.toUpperCase().replace(/-/,''));
+    return block;
+}
