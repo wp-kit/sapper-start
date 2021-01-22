@@ -1,14 +1,18 @@
 ![Hero](https://i.postimg.cc/fLPyrJ3L/hero.png)
 
 <p align="center">
-  An opinionated starter template based on the Rollup Sapper template. 🚀
+  A boilerplate for using Wordpress as Headless CMS with Sapper/Svelte. Can be used with Rest Kit or just with Wordpress and a set of plugins. 🚀
+</p>
+
+<p align="center">
+  Forked from [matt3224/sapper-start](https://github.com/matt3224/sapper-start) for that lovely Sapper pre-configured setup.
 </p>
 
 ## Hello 👋,
 
-![GitHub release](https://img.shields.io/github/release/matt3224/sapper-start.svg?style=for-the-badge)
+![GitHub release](https://img.shields.io/github/release/wp-kit/wp-sapper-start.svg?style=for-the-badge)
 
-The purpose of this repo was to save me time by doing all of the things I do on every Sapper project, but hey you might find it useful too right?!
+Wordpres is great, Sapper is great. Why not use them together? This is a boilerplate of Twenty-Twenty-One Theme but in Sapper.
 
 To clone it and get started:
 
@@ -18,57 +22,46 @@ npx degit matt3224/sapper-start my-app
 cd my-app
 npm install
 npm run dev
+cp .env.example .env
 ```
 
-Open up [localhost:3000](http://localhost:3000) and start clicking around.
+Make sure you have a Wordpress installation with the following plugins:
 
-Consult [sapper.svelte.dev](https://sapper.svelte.dev) for help getting started with Sapper itself.
+|Plugin Name|Explanation|
+|----|-----|
+|[WP ACF REST API Blocks](https://github.com/wp-kit/wp-acf-rest-api-blocks)|This is a super important plugin that outputs Gutenberg Block data to API responses for Posts and Pages. It also outputs ACF Block data if you have ACF installed. Alternatively, you could use [Rest Kit](https://github.com/wp-kit/rest-kit) which gives you a bunch of other features as well as Blocks JSON, including the ability to build and manage custom Gutenberg blocks (both React style or with ACF Blocks).|
+|[WP Rest Filter](https://wordpress.org/plugins/wp-rest-filter/)|In the boilerplate code for [wp-sapper-start](https://github.com/wp-kit/wp-sapper-start), we have included examples of filtering by term and author slugs, and have implemented this based on using WP Rest Filter. We generally recommend this plugin when seeking to fetch posts and pages primarily based on term slugs.|
+|[Yoast SEO](https://wordpress.org/plugins/wordpress-seo/)|In the boilerplate code for [wp-sapper-start](https://github.com/wp-kit/wp-sapper-start), we have included examples of <head> meta tags, and have implemented this based on using Yoast SEO and WP Rest Yoast Meta. We generally recommend this plugin in all cases to control <head> tags within any framework you may be using.|
+|[WP Rest Yoast Meta](https://wordpress.org/plugins/wp-rest-yoast-meta/)|In the boilerplate code for [wp-sapper-start](https://github.com/wp-kit/wp-sapper-start), we have included examples of <head> meta tags, and have implemented this based on using Yoast SEO and WP Rest Yoast Meta. We generally recommend this plugin in all cases to control <head> tags within any framework you may be using.|
+|[WP Rest API V2 Menus](https://wordpress.org/plugins/wp-rest-api-v2-menus/)|In the boilerplate code for [wp-sapper-start](https://github.com/wp-kit/wp-sapper-start), we have included examples of fetching menus, and have implemented this based on using the endpoints provided by WP Rest API V2 Menus|
+|[Application Password](https://wordpress.org/plugins/application-passwords/)|In the boilerplate code for [wp-sapper-start](https://github.com/wp-kit/wp-sapper-start), we have included examples of creating comments, form submissions and previewing draft post and pages; we have implemented this based on storing username and application password in a .env file which is read using server routes which sends a Basic authentication header to the API, this requires Application Password. We generally recommend this plugin when needing to write data back to the API or when needing to authenticate with Wordpress for any reason from your app. We recommend this over storing the raw password in .env or using WP oAuth Server which add more complexity than is neccessary due for a headless website.|
+|[ACF to REST API](https://en-gb.wordpress.org/plugins/acf-to-rest-api/)|We generally recommend this plugin if you plan on using ACF in order to output field values within feild groups assigned to Posts and Pages, as oppose to Blocks. Any fields assigned to ACF Blocks are automatically pulled into the response when using rest-kit|
+|[WP REST Cache](https://wordpress.org/plugins/wp-rest-cache/)|We generally recommend this plugin for all scenarios when using Wordpress as a headless CMS regardless of the framework you are using.|
+
+After you have setup your Wordpress environment, make sure you edit the `.env` file and change the url to reflect your new Wordpress environment.
+
+Open up [localhost:3000](http://localhost:3000) and start clicking around.
 
 <hr/>
 
 If you use this a lot you can alias it by putting this in your zshrc or bashrc:
 ```bash
-alias sapper-start='npx degit https://github.com/matt3224/sapper-start .'
+alias wp-sapper-start='npx degit https://github.com/wp-kit/wp-sapper-start .'
 ```
-Then simply cd into your empty project directory and run `sapper-start`
-
-
-## How does this differ from sapper-template?
-
-Good question, I found myself doing these changes on every project and thought I'd save myself and you some time by making a little repo you could import just like the official sapper-template.
-
-Here are the differences:
-* Adds SCSS support out-of-the-box
-* Adds css reset based on normalize
-* Adds `numworker: 1` in rollup.config to prevent crash on servers with a single processor core
-* Adds a light suggested structure for library and component folders
-* Adds an optional utility package (Tree-shaken so if you don't use it you don't get it)
-* Adds the package version in the html head as a meta tag
-* Adds PWA support by default
-* Adds standard allow all robots.txt
-* Adds server.js middleware to redirect trailing slash urls to non trailing slash
-* Adds ability to bypass relative paths with `~` & auto resolves .js, .mjs, .html, .svelte, .scss
-   * eg. `import { util } from '~/utils';` instead of `import { util } from '../../utils.js';`
-* Changes global css link to a client.js import which prevents extraneous caching
-* Changes favicons with broader coverage
-* Changes single quotes to double in html/svelte files
-* Removes default routes, components and emptied index & layout
-* Removes custom browserslist config to use default
+Then simply cd into your empty project directory and run `wp-sapper-start`
 
 
 ## Bugs and feedback
 
-If you run into an issue which you don't see in the normal sapper-template, open an [issue](https://github.com/matt3224/sapper-start/issues).
+Consult [sapper.svelte.dev](https://sapper.svelte.dev) for help getting started with Sapper itself.
 
-## REQUIREMENTS:
-* https://wordpress.org/plugins/wp-rest-filter/
-* https://wordpress.org/plugins/wordpress-seo/
-* https://wordpress.org/plugins/wp-rest-yoast-meta/
-* https://wordpress.org/plugins/wp-rest-api-v2-menus/
-* https://wordpress.org/plugins/application-passwords/
-* https://github.com/wp-kit/wp-acf-rest-api-blocks (or wp-kit/rest-kit)
+If you run into an issue which you don't see in the normal sapper-template in relation to sapper-start, open an [issue](https://github.com/matt3224/sapper-start/issues).
 
-## REST-KIT TO DO V1
+For any issues on the Wordpress integration side of things please raise an issue on the repo.
+
+<hr/>
+
+## TO DO V1
 * Matt: Style/Fix Mobile Menu
 * Matt: Style Pagination
 * Matt: Style Comments + Gravity Forms + Search Form
@@ -78,5 +71,5 @@ If you run into an issue which you don't see in the normal sapper-template, open
 * Both: Core Blocks
 * Both: Update Readme
 
-## REST-KIT ROADMAP
+## ROADMAP
 * Both: Widgets
